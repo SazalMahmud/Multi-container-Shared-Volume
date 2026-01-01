@@ -6,7 +6,7 @@
 
     kubectl get pods my-pod
 
-    View Logs from Each Container
+ --View Logs from Each Container
 # Check the logs of container c1:
     kubectl logs my-pod -c c1
 # Check the logs of container c2:
