@@ -1,0 +1,37 @@
+apiVersion: v1
+
+kind: Pod
+
+metadata:
+  name: my-pod
+
+spec:
+  volumes:
+  - name: log-volume
+    emptyDir: {}
+
+  restartPolicy: OnFailure
+
+  containers:
+  - name: c1
+    image: busybox
+    command: ["sh", "-c", 'echo "Hello from c1 container." | tee -a /var/log/newfile']
+    volumeMounts:
+    - name: log-volume
+      mountPath: /var/log
+
+  - name: c2
+    image: busybox
+    command: ["sh", "-c", 'echo "Hello from c2 container." | tee -a /var/log/newfile']
+    volumeMounts:
+    - name: log-volume
+      mountPath: /var/log
+
+  - name: c3
+    image: busybox
+    command: ["sh", "-c", 'cat /var/log/newfile']
+    volumeMounts:
+    - name: log-volume
+      mountPath: /var/log
+
+
